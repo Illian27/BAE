@@ -84,9 +84,10 @@ db.media.updateOne(
     {$push:{Autor:"María Sancho"}}
 );
 
-// 7
+// Ejercicio 7
 db.media.updateOne(
     {titulo:"Matrix"},
-    {$push:{actores:{$each:["Antonio Banderas", "Antonio Banderas"]}}}
+    {$push:{ actores: {$each: ["Antonio Banderas", "Brad Pitt"]}}}
 );
+
 db.media.find();
