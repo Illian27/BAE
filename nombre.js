@@ -90,4 +90,29 @@ db.media.updateOne(
     {$push:{ actores: {$each: ["Antonio Banderas", "Brad Pitt"]}}}
 );
 
+// Ejercicio 8
+db.media.updateOne(
+    {titulo:"Matrix"},
+    {$addToSet:{ actores: {$each: ["Joe Pantoliano", "Brad Pitt", "Natalie Portman"]}}}
+);
+
+// Ejercicio 9
+db.media.updateOne(
+    {titulo:"Matrix"},
+    {$pop:{ actores: 1}},
+    {$pop:{ actores: -1}}
+);
+
+// Ejercicio 10
+db.media.updateOne(
+    {titulo:"Matrix"},
+    {$addToSet:{ actores: {$each: ["Joe Pantoliano", "Antonio Banderas"]}}}
+);
+
+// Ejercicio 11
+db.media.deleteOne(
+    {titulo:"Matrix"},
+    {$addToSet:{ actores: {$each: ["Joe Pantoliano", "Antonio Banderas"]}}}
+);
+
 db.media.find();
