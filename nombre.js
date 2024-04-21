@@ -121,4 +121,17 @@ db.media.updateOne(
     {$push: {canciones: {"cancion":5, "titulo": "El atardecer", "longitud": "6:50" }}}
 );
 
+// Ejercicio 13
+db.coleccion.updateOne(
+    { "titulo": "Recuerdos", 
+      "canciones.titulo": "El atardecer" },
+    { $set: { "canciones.$.cancion": 3 } }
+);
+
+// Ejercicio 14
+
+
+// Ejercicio 15
+
+
 db.media.find();
