@@ -110,9 +110,12 @@ db.media.updateOne(
 );
 
 // Ejercicio 11
-db.media.deleteOne(
+db.media.updateOne(
     {titulo:"Matrix"},
-    {$addToSet:{ actores: {$each: ["Joe Pantoliano", "Antonio Banderas"]}}}
+    {$pull:{ actores: {$in: ["Joe Pantoliano", "Antonio Banderas"]}}}
 );
+
+// Ejercicio 12
+
 
 db.media.find();
