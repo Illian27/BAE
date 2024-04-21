@@ -122,16 +122,19 @@ db.media.updateOne(
 );
 
 // Ejercicio 13
-db.coleccion.updateOne(
-    { "titulo": "Recuerdos", 
-      "canciones.titulo": "El atardecer" },
-    { $set: { "canciones.$.cancion": 3 } }
-);
+db.media.updateOne(
+    {titulo:"Recuerdos", "canciones.titulo":"El atardecer"},
+    {$inc: {"canciones.$.cancion":-2}}
+)
 
 // Ejercicio 14
-
+db.media.updateOne(
+    {titulo: "Recuerdos"},
+    {$set: {Artista: "Los piratillas"}}
+);
+db.media.find({Artista:"Los piratillas"})
 
 // Ejercicio 15
+db.media.renameCollection("multimedia");
 
-
-db.media.find();
+db.multimedia.find();
