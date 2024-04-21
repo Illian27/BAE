@@ -115,7 +115,10 @@ db.media.updateOne(
     {$pull:{ actores: {$in: ["Joe Pantoliano", "Antonio Banderas"]}}}
 );
 
-// Ejercicio 12
-
+// Ejercico 12
+db.media.updateOne(
+    {titulo:"Recuerdos"},
+    {$push: {canciones: {"cancion":5, "titulo": "El atardecer", "longitud": "6:50" }}}
+);
 
 db.media.find();
