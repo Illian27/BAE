@@ -1,5 +1,6 @@
 use Spotify;
 
+// 1
 db.listas.insertMany([
     {
         nombre_lista: "Melodías de Medianoche",
@@ -87,3 +88,21 @@ db.listas.insertMany([
         idiomas: ["Ingles", "Frances", "Castellano", "Aleman"]
     }
 ]);
+
+// 2
+// Actualizar un documento
+db.listas.upateOne(
+    {}
+);
+
+// Actualizar todos los documentos
+db.listas.updateMany(
+    {}
+);
+
+// Reemplazar en el documento
+db.listas.replaceOne(
+    {}
+);
+
+db.listas.find()
