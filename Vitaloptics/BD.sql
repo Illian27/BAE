@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS vitaloptics CHARACTER SET utf8mb4 COLLATE utf8mb4_
 USE vitaloptics;
 
 -- Tablas de entidades principales
-CREATE TABLE IF NOT EXISTS cliente (
+CREATE TABLE cliente (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nombre VARCHAR(15) NOT NULL,
   telefono VARCHAR(12) NOT NULL,
@@ -15,7 +15,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS registrado (
+CREATE TABLE registrado (
   DNI CHAR(9) PRIMARY KEY NOT NULL,
   correo VARCHAR(30) NOT NULL,
   nombre_usuario VARCHAR(15) NOT NULL,
@@ -30,7 +30,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS no_registrado (
+CREATE TABLE no_registrado (
   cliente_id INT UNSIGNED PRIMARY KEY NOT NULL,
   CONSTRAINT fk_no_registrado_cliente1 FOREIGN KEY(cliente_id) REFERENCES cliente(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -39,7 +39,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS trabajador (
+CREATE TABLE trabajador (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nombre VARCHAR(15) NOT NULL,
   apellido1 VARCHAR(25) NOT NULL,
@@ -50,7 +50,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS interno (
+CREATE TABLE interno (
   trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
   DNI CHAR(9) NOT NULL,
   telefono VARCHAR(12) NULL,
@@ -63,7 +63,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS externo (
+CREATE TABLE externo (
   trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
   profesion VARCHAR(30) NOT NULL,
   empresa VARCHAR(30) NOT NULL,
@@ -74,7 +74,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS pago (
+CREATE TABLE pago (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
   num_tarjeta VARCHAR(16) NOT NULL,
   fecha DATE NOT NULL,
@@ -85,7 +85,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS factura (
+CREATE TABLE factura (
   id INT UNSIGNED AUTO_INCREMENT NOT NULL,
   nombre_trabajador VARCHAR(15) NOT NULL,
   fecha DATE NOT NULL,
@@ -101,7 +101,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS producto (
+CREATE TABLE producto (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nombre VARCHAR(15) NOT NULL,
   precio INT UNSIGNED NOT NULL,
@@ -114,7 +114,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS servicio (
+CREATE TABLE servicio (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nombre VARCHAR(15) NOT NULL,
   precio INT NOT NULL,
@@ -127,7 +127,7 @@ INSERT INTO () VALUES
 ();
 
 -- Tablas de normalizaciones
-CREATE TABLE IF NOT EXISTS interno_habilidades (
+CREATE TABLE interno_habilidades (
   interno_trabajador_id INT UNSIGNED NOT NULL,
   habilidades VARCHAR(20) NOT NULL,
   CONSTRAINT fk_interno_habilidades_interno1 FOREIGN KEY(interno_trabajador_id) REFERENCES interno(trabajador_id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -137,7 +137,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS factura_nombre_compra (
+CREATE TABLE factura_nombre_compra (
   factura_id INT UNSIGNED NOT NULL,
   factura_pago_id INT UNSIGNED NOT NULL,
   nombre_compra VARCHAR(20) NOT NULL,
@@ -148,7 +148,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS factura_precio_compra (
+CREATE TABLE factura_precio_compra (
   factura_id INT UNSIGNED NOT NULL,
   factura_pago_id INT UNSIGNED NOT NULL,
   precio_compra INT UNSIGNED NOT NULL,
@@ -160,7 +160,7 @@ INSERT INTO () VALUES
 ();
 
 -- Tablas de relaciones
-CREATE TABLE IF NOT EXISTS es_jefe_de (
+CREATE TABLE es_jefe_de (
   trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
   es_jefe_de_trabajador_id INT UNSIGNED NOT NULL,
   CONSTRAINT fk_trabajador_es_jefe_de1 FOREIGN KEY(es_jefe_de_trabajador_id) REFERENCES es_jefe_de(trabajador_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -171,7 +171,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS registrado_has_cliente (
+CREATE TABLE registrado_has_cliente (
   registrado_cliente_id INT UNSIGNED NOT NULL,
   cliente_id INT UNSIGNED NOT NULL,
   codigo CHAR(5) NOT NULL,
@@ -183,7 +183,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS realiza (
+CREATE TABLE realiza (
   registrado_cliente_id INT UNSIGNED NOT NULL,
   pago_id INT UNSIGNED NOT NULL,
   oferta VARCHAR(3) NULL,
@@ -195,7 +195,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS hace (
+CREATE TABLE hace (
   no_registrado_cliente_id INT UNSIGNED NOT NULL,
   pago_id INT UNSIGNED NOT NULL,
   CONSTRAINT fk_hace_no_registrado1 FOREIGN KEY(no_registrado_cliente_id) REFERENCES no_registrado(cliente_id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -206,7 +206,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS tramita (
+CREATE TABLE tramita (
   trabajador_id INT UNSIGNED NOT NULL,
   cliente_id INT UNSIGNED NOT NULL,
   factura_id INT UNSIGNED NOT NULL,
@@ -220,7 +220,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS tiene (
+CREATE TABLE tiene (
   factura_id INT UNSIGNED NOT NULL,
   factura_pago_id INT UNSIGNED NOT NULL,
   producto_id INT UNSIGNED NOT NULL,
@@ -232,7 +232,7 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS contiene (
+CREATE TABLE contiene (
   factura_id INT UNSIGNED NOT NULL,
   factura_pago_id INT UNSIGNED NOT NULL,
   servicio_id INT UNSIGNED NOT NULL,
