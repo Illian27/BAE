@@ -138,28 +138,6 @@ INSERT INTO interno_habilidades(interno_trabajador_id, habilidad) VALUES
 (2, 'Paciencia'),
 (3, 'Tacto');
 
-CREATE TABLE factura_nombre_compra (
-  factura_id INT UNSIGNED NOT NULL,
-  factura_pago_id INT UNSIGNED NOT NULL,
-  nombre_compra VARCHAR(50) NOT NULL,
-  CONSTRAINT fk_factura__factura1 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
-PRIMARY KEY (factura_id, factura_pago_id));
-INSERT INTO factura_nombre_compra(factura_id, factura_pago_id, nombre_compra) VALUES
-(1, 1, 'Gafas'),
-(2, 2, 'Audífonos'),
-(3, 3, 'Revision');
-
-CREATE TABLE factura_precio_compra (
-  factura_id INT UNSIGNED NOT NULL,
-  factura_pago_id INT UNSIGNED NOT NULL,
-  precio_compra FLOAT4 UNSIGNED NOT NULL,
-  CONSTRAINT fk_factura__factura10 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
-PRIMARY KEY (factura_id, factura_pago_id));
-INSERT INTO factura_precio_compra (factura_id, factura_pago_id, precio_compra) VALUES
-(1, 1, 50.00),
-(2, 2, 500.00),
-(3, 3, 35.00);
-
 -- Tablas de relaciones
 CREATE TABLE es_jefe_de (
   trabajador_id INT UNSIGNED NOT NULL,
