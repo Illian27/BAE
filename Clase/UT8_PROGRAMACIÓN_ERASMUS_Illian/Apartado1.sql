@@ -3,6 +3,10 @@ cada curso escolar una vez finalizado éste, y en el que se registren únicament
 consideres que sean relevantes para contactar con el alumnado que ha realizado la movilidad. */
 USE Erasmus;
 
+SET GLOBAL event_scheduler=ON;
+SHOW VARIABLES LIKE 'event_scheduler';
+
+
 CREATE TABLE IF NOT EXISTS log_alumnado (
 		id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
 		Nombre varchar(15) not null,
@@ -17,9 +21,14 @@ BEGIN
 	INSERT INTO log_alumnado(Nombre, Apellidos, Calle) VALUES (OLD.Nombre, OLD.Apellidos, OLD.Calle);
 END$$
 
-DELIMITER ;
-DROP TABLE Alumno;
-SELECT * FROM log_alumnado;
+DROP EVENT IF EXISTS borrar_Alumno $$ -- AT CURRENT_DATE + 1 INTERVALE 1 SECOND || EVERY 1 SECOND
+CREATE EVENT borrar_Alumno ON SCHEDULE EVERY 1 SECOND STARTS CURRENT_TIMESTAMP ENABLE DO
+BEGIN
+	DELETE FROM Alumno WHERE Nombre like 'Juan';
+END $$
 
--- Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails 
--- (`erasmus`.`realiza_entrevista`, CONSTRAINT `FK_Alumno_DNI` FOREIGN KEY (`Alumno_DNI`) REFERENCES `alumno` (`DNI`))
+DELIMITER ;
+DELETE FROM Alumno WHERE Nombre like 'Juan';
+SELECT * FROM Alumno;
+SELECT * FROM log_alumnado;
+SHOW EVENTS;

@@ -184,8 +184,8 @@ create table if not exists Realiza_entrevista(
 	Entrevista_idEntrevista int unsigned not null,
 	Colaboradores_Profesor_DNI char(9) not null,
 	Calificacion tinyint unsigned not null,
-    CONSTRAINT FK_Alumno_DNI foreign key (Alumno_DNI) references Alumno(DNI),
-    CONSTRAINT FK_Entrevista_idEntrevista foreign key (Entrevista_idEntrevista) references Entrevista(idEntrevista)
+    foreign key (Alumno_DNI) references Alumno(DNI),
+    foreign key (Entrevista_idEntrevista) references Entrevista(idEntrevista)
 );
 
 create table if not exists Realiza_prueba(
@@ -215,3 +215,5 @@ create table if not exists Da(
 	foreign key (Profesor_DNI) references Profesor(DNI),
     foreign key (Reuniones_idReuniones) references Reuniones(idReuniones),
 primary key(Profesor_DNI, Reuniones_idReuniones));
+
+SET foreign_key_checks = 0;
