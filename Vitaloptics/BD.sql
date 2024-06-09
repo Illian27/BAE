@@ -144,8 +144,8 @@ CREATE TABLE es_jefe_de (
   jefe_id INT UNSIGNED NOT NULL,
   CONSTRAINT fk_jefe FOREIGN KEY(jefe_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_es_jefe_de_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE,
-PRIMARY KEY(trabajador_id, es_jefe_de_trabajador_id));
-INSERT INTO es_jefe_de(trabajador_id, es_jefe_de_trabajador_id) VALUES
+PRIMARY KEY(trabajador_id, jefe_id));
+INSERT INTO es_jefe_de(trabajador_id, jefe_id) VALUES
 (1, 2),
 (2, 3),
 (3, 1);
