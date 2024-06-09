@@ -161,3 +161,9 @@ CREATE TABLE IF NOT EXISTS factura_precio_compra (
   precio_compra INT UNSIGNED NOT NULL,
   CONSTRAINT fk_factura__factura10 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
 PRIMARY KEY (factura_id, factura_pago_id));
+
+-- Inserciones
+INSERT INTO () VALUES
+(),
+(),
+();
