@@ -15,39 +15,6 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS trabajador (
-  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  nombre VARCHAR(15) NOT NULL,
-  apellido1 VARCHAR(25) NOT NULL,
-  apellido2 VARCHAR(25) NOT NULL
-);
-INSERT INTO () VALUES
-(),
-(),
-();
-
-CREATE TABLE IF NOT EXISTS es_jefe_de (
-  trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
-  es_jefe_de_trabajador_id INT UNSIGNED NOT NULL,
-  CONSTRAINT fk_trabajador_es_jefe_de1 FOREIGN KEY(es_jefe_de_trabajador_id) REFERENCES es_jefe_de(trabajador_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_es_jefe_de_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-INSERT INTO () VALUES
-(),
-(),
-();
-
-CREATE TABLE IF NOT EXISTS pago (
-  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  num_tarjeta VARCHAR(16) NOT NULL,
-  fecha DATE NOT NULL,
-  total INT NOT NULL
-);
-INSERT INTO () VALUES
-(),
-(),
-();
-
 CREATE TABLE IF NOT EXISTS registrado (
   DNI CHAR(9) PRIMARY KEY NOT NULL,
   correo VARCHAR(30) NOT NULL,
@@ -72,11 +39,11 @@ INSERT INTO () VALUES
 (),
 ();
 
-CREATE TABLE IF NOT EXISTS externo (
-  trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
-  profesion VARCHAR(30) NOT NULL,
-  empresa VARCHAR(30) NOT NULL,
-  CONSTRAINT fk_externo_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS trabajador (
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  nombre VARCHAR(15) NOT NULL,
+  apellido1 VARCHAR(25) NOT NULL,
+  apellido2 VARCHAR(25) NOT NULL
 );
 INSERT INTO () VALUES
 (),
@@ -90,6 +57,28 @@ CREATE TABLE IF NOT EXISTS interno (
   correo VARCHAR(30) NOT NULL,
   num_cuenta VARCHAR(20) NOT NULL,
   CONSTRAINT fk_interno_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO () VALUES
+(),
+(),
+();
+
+CREATE TABLE IF NOT EXISTS externo (
+  trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
+  profesion VARCHAR(30) NOT NULL,
+  empresa VARCHAR(30) NOT NULL,
+  CONSTRAINT fk_externo_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO () VALUES
+(),
+(),
+();
+
+CREATE TABLE IF NOT EXISTS pago (
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  num_tarjeta VARCHAR(16) NOT NULL,
+  fecha DATE NOT NULL,
+  total INT NOT NULL
 );
 INSERT INTO () VALUES
 (),
@@ -131,6 +120,51 @@ CREATE TABLE IF NOT EXISTS servicio (
   precio INT NOT NULL,
   detalles TEXT NOT NULL,
   tipo ENUM('Óptica', 'Audiología') NOT NULL
+);
+INSERT INTO () VALUES
+(),
+(),
+();
+
+-- Tablas de normalizaciones
+CREATE TABLE IF NOT EXISTS interno_habilidades (
+  interno_trabajador_id INT UNSIGNED NOT NULL,
+  habilidades VARCHAR(20) NOT NULL,
+  CONSTRAINT fk_interno_habilidades_interno1 FOREIGN KEY(interno_trabajador_id) REFERENCES interno(trabajador_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+INSERT INTO () VALUES
+(),
+(),
+();
+
+CREATE TABLE IF NOT EXISTS factura_nombre_compra (
+  factura_id INT UNSIGNED NOT NULL,
+  factura_pago_id INT UNSIGNED NOT NULL,
+  nombre_compra VARCHAR(20) NOT NULL,
+  CONSTRAINT fk_factura__factura1 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
+PRIMARY KEY (factura_id, factura_pago_id));
+INSERT INTO () VALUES
+(),
+(),
+();
+
+CREATE TABLE IF NOT EXISTS factura_precio_compra (
+  factura_id INT UNSIGNED NOT NULL,
+  factura_pago_id INT UNSIGNED NOT NULL,
+  precio_compra INT UNSIGNED NOT NULL,
+  CONSTRAINT fk_factura__factura10 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
+PRIMARY KEY (factura_id, factura_pago_id));
+INSERT INTO () VALUES
+(),
+(),
+();
+
+-- Tablas de relaciones
+CREATE TABLE IF NOT EXISTS es_jefe_de (
+  trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
+  es_jefe_de_trabajador_id INT UNSIGNED NOT NULL,
+  CONSTRAINT fk_trabajador_es_jefe_de1 FOREIGN KEY(es_jefe_de_trabajador_id) REFERENCES es_jefe_de(trabajador_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_es_jefe_de_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 INSERT INTO () VALUES
 (),
@@ -209,37 +243,3 @@ INSERT INTO () VALUES
 (),
 (),
 ();
-
-CREATE TABLE IF NOT EXISTS interno_habilidades (
-  interno_trabajador_id INT UNSIGNED NOT NULL,
-  habilidades VARCHAR(20) NOT NULL,
-  CONSTRAINT fk_interno_habilidades_interno1 FOREIGN KEY(interno_trabajador_id) REFERENCES interno(trabajador_id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-INSERT INTO () VALUES
-(),
-(),
-();
-
-CREATE TABLE IF NOT EXISTS factura_nombre_compra (
-  factura_id INT UNSIGNED NOT NULL,
-  factura_pago_id INT UNSIGNED NOT NULL,
-  nombre_compra VARCHAR(20) NOT NULL,
-  CONSTRAINT fk_factura__factura1 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
-PRIMARY KEY (factura_id, factura_pago_id));
-INSERT INTO () VALUES
-(),
-(),
-();
-
-CREATE TABLE IF NOT EXISTS factura_precio_compra (
-  factura_id INT UNSIGNED NOT NULL,
-  factura_pago_id INT UNSIGNED NOT NULL,
-  precio_compra INT UNSIGNED NOT NULL,
-  CONSTRAINT fk_factura__factura10 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
-PRIMARY KEY (factura_id, factura_pago_id));
-INSERT INTO () VALUES
-(),
-(),
-();
--- Tablas de normalizaciones
--- Tablas de relaciones
