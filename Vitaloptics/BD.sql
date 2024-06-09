@@ -95,7 +95,7 @@ CREATE TABLE factura (
   nombre_cliente VARCHAR(15),
   total INT UNSIGNED NOT NULL,
   pago_id INT UNSIGNED NOT NULL,
-  CONSTRAINT fk_factura_pago FOREIGN KEY(pago_id) REFERENCES pago(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_factura_pago FOREIGN KEY(pago_id) REFERENCES pago(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 PRIMARY KEY (id, pago_id));
 INSERT INTO factura(nombre_trabajador, fecha, direccion, idcliente, nombre_cliente, total, pago_id) VALUES
 ('Juan Perez', '2024-06-01', 'Calle Mayor 1', 1, 'Carlos Martinez', 100.50, 1),
@@ -143,7 +143,7 @@ CREATE TABLE es_jefe_de (
   trabajador_id INT UNSIGNED NOT NULL,
   jefe_id INT UNSIGNED NOT NULL,
   CONSTRAINT fk_jefe FOREIGN KEY(jefe_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_es_jefe_de_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_es_jefe_de_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE RESTRICT,
 PRIMARY KEY(trabajador_id, jefe_id));
 INSERT INTO es_jefe_de(trabajador_id, jefe_id) VALUES
 (1, 2),
@@ -154,7 +154,7 @@ CREATE TABLE promociona (
   registrado_cliente_id INT UNSIGNED NOT NULL,
   cliente_id INT UNSIGNED NOT NULL,
   codigo CHAR(5) NOT NULL,
-  CONSTRAINT fk_registrado_has_cliente_registrado1 FOREIGN KEY(registrado_cliente_id) REFERENCES registrado(cliente_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_registrado_has_cliente_registrado1 FOREIGN KEY(registrado_cliente_id) REFERENCES registrado(cliente_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT fk_registrado_has_cliente_cliente1 FOREIGN KEY(cliente_id) REFERENCES cliente(id) ON DELETE CASCADE ON UPDATE CASCADE,
 PRIMARY KEY (registrado_cliente_id, cliente_id));
 INSERT INTO promociona(registrado_cliente_id, cliente_id, codigo) VALUES
@@ -167,7 +167,7 @@ CREATE TABLE realiza (
   pago_id INT UNSIGNED NOT NULL,
   oferta INT NULL,
   CONSTRAINT fk_realiza_registrado1 FOREIGN KEY(registrado_cliente_id) REFERENCES registrado(cliente_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_realiza_pago1 FOREIGN KEY(pago_id) REFERENCES pago(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_realiza_pago1 FOREIGN KEY(pago_id) REFERENCES pago(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 PRIMARY KEY (registrado_cliente_id, pago_id));
 INSERT INTO realiza(registrado_cliente_id, pago_id, oferta) VALUES
 (1, 1, '10'),
@@ -192,7 +192,7 @@ CREATE TABLE tramita (
   factura_pago_id INT UNSIGNED NOT NULL,
   CONSTRAINT fk_tramita_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_tramita_cliente1 FOREIGN KEY(cliente_id) REFERENCES cliente(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_tramita_factura1 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_tramita_factura1 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 PRIMARY KEY (trabajador_id, cliente_id));
 INSERT INTO tramita(trabajador_id, cliente_id, factura_id, factura_pago_id) VALUES
 (1, 1, 1, 1),
@@ -204,7 +204,7 @@ CREATE TABLE tiene (
   factura_pago_id INT UNSIGNED NOT NULL,
   producto_id INT UNSIGNED NOT NULL,
   CONSTRAINT fk_factura_has_producto_factura1 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_factura_has_producto_producto1 FOREIGN KEY(producto_id) REFERENCES producto(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_factura_has_producto_producto1 FOREIGN KEY(producto_id) REFERENCES producto(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
 PRIMARY KEY (factura_id, factura_pago_id, producto_id));
 INSERT INTO tiene(factura_id, factura_pago_id, producto_id) VALUES
 (1, 1, 1),
@@ -216,7 +216,7 @@ CREATE TABLE contiene (
   factura_pago_id INT UNSIGNED NOT NULL,
   servicio_id INT UNSIGNED NOT NULL,
   CONSTRAINT fk_factura_has_servicio_factura1 FOREIGN KEY(factura_id , factura_pago_id) REFERENCES factura(id , pago_id) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_factura_has_servicio_servicio1 FOREIGN KEY(servicio_id) REFERENCES servicio(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_factura_has_servicio_servicio1 FOREIGN KEY(servicio_id) REFERENCES servicio(id) ON DELETE RESTRICT ON UPDATE CASCADE,
 PRIMARY KEY (factura_id, factura_pago_id, servicio_id));
 INSERT INTO contiene(factura_id, factura_pago_id, servicio_id) VALUES
 (1, 1, 1),
