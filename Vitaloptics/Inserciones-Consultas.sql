@@ -1,63 +1,26 @@
 # Hecho por: Illian Santiago n Ortega Posso
 USE vitaloptics;
 
--- Tablas de entidades principales
-CREATE TABLE cliente (
-  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  nombre VARCHAR(15) NOT NULL,
-  telefono VARCHAR(12) NOT NULL,
-  apellido1 VARCHAR(25) NOT NULL,
-  apellido2 VARCHAR(25) NOT NULL
-);
 INSERT INTO cliente(nombre, telefono, apellido1, apellido2) VALUES
 ('Juan', '555-1234', 'Perez', 'Gomez'),
 ('Maria', '555-5678', 'Rodriguez', 'Lopez'),
 ('Carlos', '555-8765', 'Sanchez', 'Martinez');
 
-
-CREATE TABLE registrado (
-  DNI CHAR(9) PRIMARY KEY NOT NULL,
-  correo VARCHAR(30) NOT NULL,
-  nombre_usuario VARCHAR(15) NOT NULL,
-  contraseña VARCHAR(30) NOT NULL,
-  codigo_postal INT UNSIGNED NOT NULL,
-  direccion VARCHAR(50) NOT NULL,
-  cliente_id INT UNSIGNED NOT NULL UNIQUE,
-  CONSTRAINT fk_registrado_cliente1 FOREIGN KEY(cliente_id) REFERENCES cliente(id) ON DELETE  CASCADE ON UPDATE CASCADE
-);
 INSERT INTO registrado (DNI, correo, nombre_usuario, contraseña, codigo_postal, direccion, cliente_id) VALUES
 ('12345678A', 'juan@example.com', 'juan123', 'password1', '28001', 'Calle Mayor 1', 1),
 ('23456789B', 'maria@example.com', 'maria456', 'password2', '28002', 'Calle Menor 2', 2),
 ('34567890C', 'carlos@example.com', 'carlos789', 'password3', '28003', 'Calle Central 3', 3);
 
-CREATE TABLE no_registrado (
-  cliente_id INT UNSIGNED PRIMARY KEY NOT NULL,
-  CONSTRAINT fk_no_registrado_cliente1 FOREIGN KEY(cliente_id) REFERENCES cliente(id) ON DELETE  CASCADE ON UPDATE CASCADE
-);
 INSERT INTO no_registrado (cliente_id) VALUES
 (1),
 (2),
 (3);
 
-CREATE TABLE trabajador (
-  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  nombre VARCHAR(15) NOT NULL,
-  apellido1 VARCHAR(25) NOT NULL,
-  apellido2 VARCHAR(25) NOT NULL
-);
 INSERT INTO trabajador (nombre, apellido1, apellido2) VALUES
 ('Juan', 'Perez', 'Gomez'),
 ('Maria', 'Rodriguez', 'Lopez'),
 ('Carlos', 'Sanchez', 'Martinez');
 
-CREATE TABLE interno (
-  trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
-  DNI CHAR(9) NOT NULL,
-  telefono VARCHAR(12) NULL,
-  correo VARCHAR(30) NOT NULL,
-  num_cuenta CHAR(24) NOT NULL,
-  CONSTRAINT fk_interno_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE  CASCADE ON UPDATE CASCADE
-);
 INSERT INTO interno(trabajador_id, DNI, telefono, correo, num_cuenta) VALUES
 (1, '12345678A', '555-1234', 'juan@example.com', 'ES7620770024003102575766'),
 (2, '23456789B', '555-5678', 'maria@example.com', 'ES7620770024003102575767'),
