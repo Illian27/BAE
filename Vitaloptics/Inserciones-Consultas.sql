@@ -1,6 +1,7 @@
 # Hecho por: Illian Santiago n Ortega Posso
 USE vitaloptics;
 
+-- Inserciones
 INSERT INTO cliente(nombre, telefono, apellido1, apellido2) VALUES
 ('Juan', '555-1234', 'Perez', 'Gomez'),
 ('Maria', '555-5678', 'Rodriguez', 'Lopez'),
@@ -90,3 +91,6 @@ INSERT INTO contiene(factura_id, factura_pago_id, servicio_id) VALUES
 (1, 1, 1),
 (2, 2, 2),
 (3, 3, 3);
+
+-- Consultas
+SELECT FROM ;
