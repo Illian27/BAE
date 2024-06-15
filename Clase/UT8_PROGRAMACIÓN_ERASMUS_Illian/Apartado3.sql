@@ -29,4 +29,4 @@ BEGIN
 END $$
 
 DELIMITER ;
-Select * from Alumno;
+DELETE from Alumno;

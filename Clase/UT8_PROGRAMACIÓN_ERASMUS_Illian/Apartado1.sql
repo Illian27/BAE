@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS log_alumnado (
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS guardar_alumno $$
-CREATE TRIGGER guardar_alumno AFTER DELETE ON Alumno FOR EACH ROW
+CREATE TRIGGER guardar_alumno AFTER DELETE  ON Alumno FOR EACH ROW
 BEGIN
 	INSERT INTO log_alumnado(Nombre, Apellidos, Calle) VALUES (OLD.Nombre, OLD.Apellidos, OLD.Calle);
 END$$
@@ -24,11 +24,11 @@ END$$
 DROP EVENT IF EXISTS borrar_Alumno $$ -- AT CURRENT_DATE + 1 INTERVALE 1 SECOND || EVERY 1 SECOND
 CREATE EVENT borrar_Alumno ON SCHEDULE EVERY 1 SECOND STARTS CURRENT_TIMESTAMP ENABLE DO
 BEGIN
-	DELETE FROM Alumno WHERE Nombre like 'Juan';
+	DELETE  FROM Alumno WHERE Nombre like 'Juan';
 END $$
 
 DELIMITER ;
-DELETE FROM Alumno WHERE Nombre like 'Juan';
-SELECT * FROM Alumno;
-SELECT * FROM log_alumnado;
+DELETE  FROM Alumno WHERE Nombre like 'Juan';
+DELETE FROM Alumno;
+DELETE FROM log_alumnado;
 SHOW EVENTS;

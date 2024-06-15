@@ -38,4 +38,4 @@ DO CALL CrearHistorialAlumnos()$$
 
 
 DELIMITER ;
-select * from tableName;
+DELETE from tableName;

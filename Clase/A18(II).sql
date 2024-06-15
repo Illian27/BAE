@@ -109,7 +109,7 @@ CREATE TABLE log_alumnos_eliminados (
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS  trigger_guardar_alumnos_eliminados $$
-CREATE TRIGGER  trigger_guardar_alumnos_eliminados BEFORE DELETE ON alumnos FOR EACH ROW
+CREATE TRIGGER  trigger_guardar_alumnos_eliminados BEFORE DELETE  ON alumnos FOR EACH ROW
 BEGIN
 	INSERT INTO log_alumnos_eliminados(id_alumno, fecha_hora, nombre, apellido1, apellido2, email)
     VALUES(OLD.id, CURRENT_TIMESTAMP, OLD.nombre, OLD.apellido1, OLD.apellido2, OLD.email);
@@ -156,7 +156,7 @@ CREATE TABLE `log_borrados` (
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS registro_log_borrados $$
-CREATE TRIGGER registro_log_borrados BEFORE DELETE ON noticias FOR EACH ROW
+CREATE TRIGGER registro_log_borrados BEFORE DELETE  ON noticias FOR EACH ROW
 BEGIN
 	INSERT INTO log_borrados  VALUES(OLD.autor_id, OLD.fecha_pub, OLD.titulo);
 END $$

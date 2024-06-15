@@ -130,11 +130,11 @@ db.listas.updateOne(
 
 // 4)
 // Elimina de las listas la "Top Hits 2020"
-db.listas.deleteOne(
+db.listas.DELETE One(
 {'nombre_lista':'Top Hits 2020'}
 )
 
 // Elimina de las listas aquellas que tienen 4000 o menos seguidores
-db.listas.deleteMany(
+db.listas.DELETE Many(
 {'numero_seguidores': {$lte: 4000}}
 )

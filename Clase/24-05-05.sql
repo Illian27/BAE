@@ -46,14 +46,14 @@ DELIMITER ;
 INSERT INTO alumnos VALUES (1, 'Pepe', 'López', 'López', -1);
 INSERT INTO alumnos VALUES (2, 'María', 'Sánchez', 'Sánchez', 11);
 INSERT INTO alumnos VALUES (3, 'Juan', 'Pérez', 'Pérez', 8.5);
--- SELECT * FROM alumnos;
+-- DELETE FROM alumnos;
 
 -- Actualizaciones
 UPDATE alumnos SET nota = -4 WHERE id = 3;
 UPDATE alumnos SET nota = 14 WHERE id = 3;
 UPDATE alumnos SET nota = 9.5 WHERE id = 3;
 
--- SELECT * FROM alumnos;
+-- DELETE FROM alumnos;
 
 -- Segunda parte
 DELIMITER $$
