@@ -26,23 +26,13 @@ INSERT INTO interno(trabajador_id, DNI, telefono, correo, num_cuenta) VALUES
 (2, '23456789B', '555-5678', 'maria@example.com', 'ES7620770024003102575767'),
 (3, '34567890C', '555-8765', 'carlos@example.com', 'ES7620770024003102575768');
 
-CREATE TABLE externo (
-  trabajador_id INT UNSIGNED PRIMARY KEY NOT NULL,
-  profesion VARCHAR(30) NOT NULL,
-  empresa VARCHAR(30) NOT NULL,
-  CONSTRAINT fk_externo_trabajador1 FOREIGN KEY(trabajador_id) REFERENCES trabajador(id) ON DELETE  CASCADE ON UPDATE CASCADE
-);
+
 INSERT INTO externo(trabajador_id, profesion, empresa) VALUES
 (1, 'Consultor', 'ABC Consulting'),
 (2, 'Ingeniero', 'XYZ Engineering'),
 (3, 'Analista', 'Data Solutions');
 
-CREATE TABLE pago (
-  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  num_tarjeta VARCHAR(19) NOT NULL,
-  fecha DATETIME NOT NULL,
-  total FLOAT4 NOT NULL
-);
+
 INSERT INTO pago(num_tarjeta, fecha, total) VALUES
 ('1234-5678-9012-3456', '2024-06-01', 100.50),
 ('2345-6789-0123-4567', '2024-06-02', 200.75),
