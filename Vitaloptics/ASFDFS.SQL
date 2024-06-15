@@ -1,4 +1,5 @@
 # Hecho por: Illian Santiago Ortega Posso
+USE vitaloptics;
 
 -- Administrador
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY '1ADMIN2istr@dor3';
