@@ -1,15 +1,20 @@
 # Hecho por: Illian Santiago Ortega Posso
 USE vitaloptics;
 
--- Al menos una función almacenada que a partir de algunos parámetros de entrada retorne un valor.
-
 DELIMITER $$
-DROP FUNCTION IF EXISTS esimpar $$
-CREATE FUNCTION esimpar(numero int) RETURNS int DETERMINISTIC
+
+-- Transforma el nombre de un jefe en el id del mismo
+DROP FUNCTION IF EXISTS devolver_id $$
+CREATE FUNCTION devolver_id (nombreJefe VARCHAR(15)) RETURNS VARCHAR(15) DETERMINISTIC
 BEGIN
-END; $$
+	DECLARE idJefe INT;
+    DECLARE nombresTrabajadores TEXT DEFAULT '';
+    
+	SET idJefe = (SELECT id FROM trabajador WHERE nombre LIKE nombreJefe);
+    
+    RETURN (idJefe);
+END $$
 
 DELIMITER ;
-SELECT esimpar(42);
-SET @x=esimpar(42);
-SELECT @x;
+SET @idJefe=devolver_id('Juan');
+SELECT @idJefe;

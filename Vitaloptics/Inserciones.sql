@@ -58,9 +58,9 @@ INSERT INTO interno_habilidades(interno_trabajador_id, habilidad) VALUES
 (3, 'Tacto');
 
 INSERT INTO es_jefe_de(trabajador_id, jefe_id) VALUES
-(1, 2),
-(2, 3),
-(3, 1);
+(2, 1),
+(3, 1),
+(3, 2);
 
 INSERT INTO promociona(registrado_cliente_id, cliente_id, codigo) VALUES
 (1, 2, 'AB123'),
@@ -91,14 +91,3 @@ INSERT INTO contiene(factura_id, factura_pago_id, servicio_id) VALUES
 (1, 1, 1),
 (2, 2, 2),
 (3, 3, 3);
-
--- Consultas
-SELECT FROM INNER JOIN On;
-SELECT FROM INNER JOIN WHERE = ;
-SELECT FROM INNER JOIN WHERE = ;
-
-SELECT FROM LEFT OUTER JOIN On WHERE = ;
-SELECT FROM RIGHT OUTER JOIN On WHERE = ;
-SELECT FROM LEFT OUTER JOIN On WHERE = ;
-
-DELETE FROM  WHERE =(SELECT FROM INNER JOIN);

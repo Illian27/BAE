@@ -1,15 +1,12 @@
 # Hecho por: Illian Santiago Ortega Posso
 USE vitaloptics;
-
--- Al menos un evento que se realice únicamente en un intervalo de tiempo determinado o bien de forma periódica
+SET GLOBAL event_scheduler=ON;
 
 DELIMITER $$
-DROP EVENT IF EXISTS event_name $$
-CREATE EVENT event_name ON SCHEDULE EVERY 1 SECOND STARTS CURRENT_TIMESTAMP ENABLE DO
-BEGIN
-END $$
 
-DELIMITER ;
-SET GLOBAL event_scheduler=ON;
-SHOW VARIABLES LIKE 'event_scheduler';
-SHOW PROCESSLIST;
+-- Elimina aquellos pagos que se hicieron hace tres años
+DROP EVENT IF EXISTS eliminaPagos $$
+CREATE EVENT eliminaPagos ON SCHEDULE EVERY 1 YEAR ENABLE DO
+BEGIN
+	DELETE FROM pago WHERE YEAR(fecha) < YEAR(CURRENT_TIMESTAMP) - 3;
+END $$
